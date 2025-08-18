@@ -1,0 +1,66 @@
+{
+  "name": "appoint-miniapp",
+  "version": "0.0.1",
+  "description": "appoint-miniapp",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "Sass",
+    "framework": "Solid"
+  },
+  "scripts": {
+    "postinstall": "weapp-tw patch",
+    "build:weapp": "taro build --type weapp",
+    "build:qq": "taro build --type qq",
+    "dev:weapp": "pnpm run build:weapp --watch",
+    "dev:qq": "pnpm run build:qq --watch",
+    "lint": "biome lint",
+    "format:style": "prettier --write '**/*.{css,scss}'",
+    "format": "biome check --write"
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "maintained node versions"
+  ],
+  "author": "",
+  "dependencies": {
+    "@babel/runtime": "^7.24.4",
+    "@tarojs/components": "4.1.4",
+    "@tarojs/helper": "4.1.4",
+    "@tarojs/plugin-framework-solid": "4.1.4",
+    "@tarojs/plugin-platform-qq": "4.1.4",
+    "@tarojs/plugin-platform-weapp": "4.1.4",
+    "@tarojs/runtime": "4.1.4",
+    "@tarojs/shared": "4.1.4",
+    "@tarojs/taro": "4.1.4",
+    "solid-js": "^1.8.16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@biomejs/biome": "2.2.0",
+    "@iconify-json/lucide": "^1.2.62",
+    "@iconify/tailwind4": "^1.0.6",
+    "@tailwindcss/node": "^4.1.12",
+    "@tailwindcss/oxide": "^4.1.12",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@tarojs/cli": "4.1.5",
+    "@tarojs/plugin-generator": "4.1.5",
+    "@tarojs/taro-loader": "4.1.5",
+    "@tarojs/webpack5-runner": "4.1.5",
+    "@types/node": "^24.3.0",
+    "@types/webpack-env": "^1.13.6",
+    "babel-preset-taro": "4.1.5",
+    "eslint": "^9.33.0",
+    "eslint-config-taro": "4.1.5",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "sass": "^1.75.0",
+    "tailwindcss": "^4.1.12",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "typescript": "^5.4.5",
+    "weapp-tailwindcss": "^4.2.5",
+    "webpack": "^5.91.0"
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+}
