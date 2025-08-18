@@ -1,11 +1,11 @@
 # CUMT Appoint Miniapp
-![Taro version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.dependencies.%40tarojs%2Ftaro&style=flat-square&label=Taro)
-![Solid.js version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.dependencies.solid-js&style=flat-square&label=Solid.js)
-![Tailwind version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.devDependencies.tailwindcss&style=flat-square&label=Tailwind)
+[![Taro version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.dependencies.%40tarojs%2Ftaro&style=flat-square&label=Taro)](https://taro.zone/)
+[![Solid.js version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.dependencies.solid-js&style=flat-square&label=Solid.js)](https://solidjs.com/)
+[![Tailwind version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgithub.com%2FOpenCUMT%2Fappoint-miniapp%2Fraw%2Fmain%2Fpackage.json&query=%24.devDependencies.tailwindcss&style=flat-square&label=Tailwind)](https://tailwindcss.com/)
 
-![Version](https://img.shields.io/github/package-json/v/OpenCUMT/appoint-miniapp?style=flat-square)
-![WeChat](https://img.shields.io/badge/WeChat%20App-07C160?style=flat-square&logo=wechat&logoColor=white)
-![Tencent QQ](https://img.shields.io/badge/QQ%20MiniApp-12B7F5?style=flat-square&logo=qq&logoColor=white)
+[![Version](https://img.shields.io/github/package-json/v/OpenCUMT/appoint-miniapp?style=flat-square)](?tab=readme-ov-file)
+[![WeChat](https://img.shields.io/badge/WeChat%20App-07C160?style=flat-square&logo=wechat&logoColor=white)](?tab=readme-ov-file)
+[![Tencent QQ](https://img.shields.io/badge/QQ%20MiniApp-12B7F5?style=flat-square&logo=qq&logoColor=white)](?tab=readme-ov-file)
 
 ## Structure
 
