@@ -1,0 +1,13 @@
+dist/
+
+deploy_versions/
+.temp/
+.swc
+
+.rn_temp/
+
+node_modules/
+.DS_Store/
+.idea/
+
+*.local
