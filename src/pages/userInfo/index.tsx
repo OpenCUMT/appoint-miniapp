@@ -1,4 +1,4 @@
-import { Text, View } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 
 export default function Index() {
@@ -7,8 +7,8 @@ export default function Index() {
   });
 
   return (
-    <View class="text-[#066ecf] text-[100px]">
-      <Text>Hello world!</Text>
+    <View >
+      hello world
     </View>
   );
 }
