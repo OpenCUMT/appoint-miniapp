@@ -3,6 +3,7 @@ import { defineConfig, type UserConfigExport } from '@tarojs/cli'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import devConfig from './dev'
 import prodConfig from './prod'
+import path from 'node:path';
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
@@ -61,6 +62,13 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
                 rem2rpx: true,
                 customAttributes: {
                   '*': [/[A-Za-z]?[A-Za-z-]*[Cc]lass/],
+                },
+                tailwindcss: {
+                  v4: {
+                    cssEntries: [
+                      path.resolve(__dirname, '../src/app.css')
+                    ]
+                  }
                 }
               }]
             }
