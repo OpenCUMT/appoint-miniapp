@@ -29,9 +29,13 @@ export default function Index() {
         </View>
       </View>
 
-      <View class="flex justify-center">
-        <View class="m-10 border-4 border-red-500">
+      <View class="flex flex-col justify-center items-center text-center">
+        <View class="m-10 border-4 border-red-500 w-full rounded-sm">
           <Text>newapoint</Text>
+        </View>
+
+        <View class="border-4 border-red-500 w-full rounded-sm">
+          <Text>Here is text</Text>
         </View>
       </View>
 
