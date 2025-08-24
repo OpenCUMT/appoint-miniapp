@@ -3,7 +3,6 @@ import { useLoad } from "@tarojs/taro";
 import PlaceholderIcon from "@/assets/icon/placeholder.png";
 
 import { createSignal } from 'solid-js';
-// import "./index.scss"; // 样式已迁移至 Tailwind CSS，不再需要此文件
 
 export default function Index() {
   useLoad(() => {

@@ -1,89 +1,109 @@
-import { Image, Text, View } from "@tarojs/components";
+import { Image, Text, View, Button } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
-// import "./index.scss"; // 样式已迁移至 Tailwind CSS，不再需要此文件
 
-// 导入图标资源 (请确保您在assets/icon目录下有这些图标)
-import UserIcon from "@/assets/icon/placeholder.png";
-import HistoryIcon from "@/assets/icon/placeholder.png";
-import HelpIcon from "@/assets/icon/placeholder.png";
-import InfoIcon from "@/assets/icon/placeholder.png";
-import AgreementIcon from "@/assets/icon/placeholder.png";
+// 图标资源请替换为实际路径
+import AvatarPlaceholder from "@/assets/icon/placeholder.png";
 import ChevronRight from "@/assets/icon/placeholder.png";
-import AvatarPlaceholder from "@/assets/icon/placeholder.png"; // 用户头像占位符
 
-export default function Manage() {
+export default function Settings() {
   useLoad(() => {
-    console.log("用户管理页面加载.");
+    console.log("设置页面加载.");
   });
 
   // 模拟用户信息
   const userInfo = {
     name: "开发者",
     avatar: AvatarPlaceholder,
+    studentId: "2023123456",
+    department: "部门1",
+    isAdmin: true, // 是否管理员
   };
 
-  // 列表项数据
+  // 切换部门
+  const handleSwitchDept = () => {
+    Taro.showToast({ title: "切换部门", icon: "none" });
+    // 实际逻辑请替换
+  };
+
+  // 按钮列表
   const menuItems = [
     {
-      icon: UserIcon,
-      label: "个人信息",
-      onClick: () => Taro.navigateTo({ url: "/pages/userInfo/index" }),
+      label: "机构账号绑定/解绑",
+      onClick: () => Taro.navigateTo({ url: "/pages/bindInstitutionId/index" }),
     },
     {
-      icon: HistoryIcon,
-      label: "预约记录",
-      onClick: () => Taro.navigateTo({ url: "/pages/history/index" }),
+      label: "微信绑定/解绑",
+      onClick: () => Taro.navigateTo({ url: "/pages/bindWechat/index" }),
     },
     {
-      icon: HelpIcon,
-      label: "使用帮助",
-      onClick: () => Taro.navigateTo({ url: "/pages/help/index" }),
+      label: "联系我们",
+      onClick: () => Taro.navigateTo({ url: "/pages/contact/index" }),
+    },
+    {
+      label: "隐私协议",
+      onClick: () => Taro.navigateTo({ url: "/pages/privacy/index" }),
+    },
+    {
+      label: "第三方信息共享清单",
+      onClick: () => Taro.navigateTo({ url: "/pages/shareList/index" }),
+    },
+    {
+      label: "退出登录",
+      onClick: () => Taro.navigateTo({ url: "/pages/logout/index" }),
     },
   ];
 
-  const aboutItems = [
-    {
-      icon: InfoIcon,
-      label: "关于部门1",
-      onClick: () => Taro.navigateTo({ url: "/pages/about/index" }),
-    },
-    {
-      icon: InfoIcon,
-      label: "关于部门2",
-      onClick: () => Taro.navigateTo({ url: "/pages/about/index" }),
-    },
-    {
-      icon: AgreementIcon,
-      label: "服务协议",
-      onClick: () => Taro.navigateTo({ url: "/pages/agreement/index" }),
-    },
-  ];
-
-  const renderMenuItem = (item) => (
-    <View class="flex items-center p-[32rpx] relative transition-colors duration-200 cursor-pointer active:bg-[#f2f3f5] last:border-b-0 border-b border-solid border-transparent border-b-[#ebedf0]" onClick={item.onClick}>
-      <Image class="w-[48rpx] h-[48rpx] mr-[32rpx]" src={item.icon} mode="aspectFit" />
-      <Text class="flex-1 text-[30rpx] text-[#323233]">{item.label}</Text>
-      <Image class="w-[32rpx] h-[32rpx] opacity-50" src={ChevronRight} mode="aspectFit" />
-    </View>
-  );
+  // 管理员专属
+  const adminItem = {
+    label: "我的角色",
+    onClick: () => Taro.navigateTo({ url: "/pages/role/index" }),
+  };
 
   return (
-    <View class="min-h-screen bg-[#f7f8fa] pb-[32rpx]">
-      {/* 用户信息头部 */}
-      <View class="flex items-center py-[60rpx] px-[40rpx] bg-gradient-to-br from-[#e0eafc] to-[#cfdef3] mb-[32rpx]">
-        <Image class="w-[120rpx] h-[120rpx] rounded-full border-[4rpx] border-white shadow-[0_4rpx_12rpx_rgba(0,0,0,0.1)] mr-[32rpx]" src={userInfo.avatar} />
-        <Text class="text-[40rpx] font-semibold text-[#2b5876]">{userInfo.name}</Text>
+    <View class="min-h-screen pb-[32rpx]">
+      {/* 用户信息区 */}
+      <View class="flex flex-row items-center py-[48rpx] px-[40rpx] mb-[32rpx] rounded-b-[32rpx]">
+        <Image class="w-[120rpx] h-[120rpx] rounded-full border-[4rpx] border-white shadow-[0_4rpx_12rpx_rgba(0,0,0,0.1)] mb-[16rpx]" src={userInfo.avatar} />
+        <View class="flex flex-col flex-1 ml-[32rpx]">
+          {/*开发者与管理员*/}
+          <View class="flex flex-row">
+              <Text class="text-[36rpx] font-semibold mb-[8rpx]">{userInfo.name}</Text>
+              {userInfo.isAdmin && (
+            <View class="mt-[8rpx] px-[20rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium">
+              管理员
+            </View>
+          )}
+          </View>
+          <Text class="text-[28rpx] mb-[8rpx]">学号：{userInfo.studentId}</Text>
+          <View class="flex flex-row items-center">
+          <Text class="text-[28rpx]">{userInfo.department}</Text>
+          <Button class="ml-[16rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium" onClick={handleSwitchDept}>切换部门</Button>
+          </View>
+
+        </View>
       </View>
 
-      {/* 功能列表 */}
-      <View class="bg-white rounded-[16rpx] mx-[32rpx] mb-[32rpx] overflow-hidden shadow-[0_4rpx_16rpx_rgba(0,0,0,0.04)]">
-        {menuItems.map(renderMenuItem)}
-      </View>
-
-      {/* 关于列表 */}
-      <View class="bg-white rounded-[16rpx] mx-[32rpx] mb-[32rpx] overflow-hidden shadow-[0_4rpx_16rpx_rgba(0,0,0,0.04)]">
-        {aboutItems.map(renderMenuItem)}
+      {/* 功能区 */}
+      <View class="flex flex-col gap-[24rpx] px-[32rpx]">
+        {menuItems.map((item, idx) => (
+          <View
+            class="flex items-center px-[32rpx] py-[24rpx] bg-white rounded-[12rpx] border text-[30rpx] font-medium active:bg-[#f2f3f5] transition-colors duration-200"
+            onClick={item.onClick}
+          >
+            <Text class="flex-1">{item.label}</Text>
+            <Image class="w-[32rpx] h-[32rpx] opacity-50" src={ChevronRight} mode="aspectFit" />
+          </View>
+        ))}
+        {userInfo.isAdmin && (
+          <View
+            class="flex items-center px-[32rpx] py-[24rpx] bg-white rounded-[12rpx] border text-[30rpx] font-medium active:bg-[#e6f7ff] transition-colors duration-200"
+            onClick={adminItem.onClick}
+          >
+            <Text class="flex-1">{adminItem.label}</Text>
+            <Image class="w-[32rpx] h-[32rpx] opacity-50" src={ChevronRight} mode="aspectFit" />
+          </View>
+        )}
       </View>
     </View>
   );

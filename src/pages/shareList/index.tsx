@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components";
+import { Text,View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 
 
@@ -9,7 +9,7 @@ export default function Index() {
 
   return (
     <View >
-      服务协议
+      <Text>第三方信息共享清单</Text>
     </View>
   );
 }

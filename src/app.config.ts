@@ -3,11 +3,12 @@ export default defineAppConfig({
     "pages/appoint/index",
     "pages/manage/index",
     "pages/settings/index",
-    "pages/about/index",
-    "pages/agreement/index",
     "pages/history/index",
-    "pages/userInfo/index",
-    "pages/help/index"
+    "pages/bindWechat/index",
+    "pages/bindInstitutionId/index",
+    "pages/privacy/index",
+    "pages/shareList/index",
+    "pages/contact/index"
   ],
   tabBar: {
     color: "#7A7E83",

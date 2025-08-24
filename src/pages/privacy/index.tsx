@@ -1,4 +1,4 @@
-import { View } from "@tarojs/components";
+import { Text,View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 
 
@@ -9,7 +9,7 @@ export default function Index() {
 
   return (
     <View >
-      hello world
+      <Text>隐私政策</Text>
     </View>
   );
 }

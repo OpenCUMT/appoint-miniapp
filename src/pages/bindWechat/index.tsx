@@ -1,5 +1,6 @@
-import { View } from "@tarojs/components";
+import { Text,View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
+
 
 export default function Index() {
   useLoad(() => {
@@ -7,8 +8,8 @@ export default function Index() {
   });
 
   return (
-    <View >
-      hello world
+    <View class="text-bold">
+      <Text>微信绑定/解绑</Text>
     </View>
   );
 }
