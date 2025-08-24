@@ -1,6 +1,7 @@
 import { Image, Text, View, Button } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
+import { userInfo, setUserDepartment } from "@/store";
 
 // 图标资源请替换为实际路径
 import AvatarPlaceholder from "@/assets/icon/placeholder.png";
@@ -9,22 +10,9 @@ import ChevronRight from "@/assets/icon/placeholder.png";
 export default function Settings() {
   useLoad(() => {
     console.log("设置页面加载.");
+    // 这里可以加载用户信息
+    // api.getUserInfo().then(data => userStore.setUserInfo(data));
   });
-
-  // 模拟用户信息
-  const userInfo = {
-    name: "开发者",
-    avatar: AvatarPlaceholder,
-    studentId: "2023123456",
-    department: "部门1",
-    isAdmin: true, // 是否管理员
-  };
-
-  // 切换部门
-  const handleSwitchDept = () => {
-    Taro.showToast({ title: "切换部门", icon: "none" });
-    // 实际逻辑请替换
-  };
 
   // 按钮列表
   const menuItems = [
@@ -64,23 +52,30 @@ export default function Settings() {
     <View class="min-h-screen pb-[32rpx]">
       {/* 用户信息区 */}
       <View class="flex flex-row items-center py-[48rpx] px-[40rpx] mb-[32rpx] rounded-b-[32rpx]">
-        <Image class="w-[120rpx] h-[120rpx] rounded-full border-[4rpx] border-white shadow-[0_4rpx_12rpx_rgba(0,0,0,0.1)] mb-[16rpx]" src={userInfo.avatar} />
+        <Image
+          class="w-[120rpx] h-[120rpx] rounded-full border-[4rpx] border-white shadow-[0_4rpx_12rpx_rgba(0,0,0,0.1)] mb-[16rpx]"
+          src={userInfo().avatar || AvatarPlaceholder}
+        />
         <View class="flex flex-col flex-1 ml-[32rpx]">
           {/*开发者与管理员*/}
           <View class="flex flex-row">
-              <Text class="text-[36rpx] font-semibold mb-[8rpx]">{userInfo.name}</Text>
-              {userInfo.isAdmin && (
-            <View class="mt-[8rpx] px-[20rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium">
-              管理员
-            </View>
-          )}
+            <Text class="text-[36rpx] font-semibold mb-[8rpx]">{userInfo().name}</Text>
+            {userInfo().isAdmin && (
+              <View class="mt-[8rpx] px-[20rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium">
+                管理员
+              </View>
+            )}
           </View>
-          <Text class="text-[28rpx] mb-[8rpx]">学号：{userInfo.studentId}</Text>
+          <Text class="text-[28rpx] mb-[8rpx]">学号：{userInfo().studentId}</Text>
           <View class="flex flex-row items-center">
-          <Text class="text-[28rpx]">{userInfo.department}</Text>
-          <Button class="ml-[16rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium" onClick={handleSwitchDept}>切换部门</Button>
+            <Text class="text-[28rpx]">{userInfo().department}</Text>
+            <Button
+              class="ml-[16rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium"
+              onClick={setUserDepartment}
+            >
+              切换部门
+            </Button>
           </View>
-
         </View>
       </View>
 
@@ -95,7 +90,7 @@ export default function Settings() {
             <Image class="w-[32rpx] h-[32rpx] opacity-50" src={ChevronRight} mode="aspectFit" />
           </View>
         ))}
-        {userInfo.isAdmin && (
+        {userInfo().isAdmin && (
           <View
             class="flex items-center px-[32rpx] py-[24rpx] bg-white rounded-[12rpx] border text-[30rpx] font-medium active:bg-[#e6f7ff] transition-colors duration-200"
             onClick={adminItem.onClick}
