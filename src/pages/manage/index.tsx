@@ -1,6 +1,6 @@
 import { Text, View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
-import { userInfo } from "@/store";
+import { userInfo } from "@/store/user";
 
 export default function Index() {
   useLoad(() => {

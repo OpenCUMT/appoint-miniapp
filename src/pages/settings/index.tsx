@@ -1,7 +1,7 @@
 import { Image, Text, View, Button } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
-import { userInfo, setUserDepartment } from "@/store";
+import { userInfo,setUserDepartment } from "@/services/user";
 
 // 图标资源请替换为实际路径
 import AvatarPlaceholder from "@/assets/icon/placeholder.png";
