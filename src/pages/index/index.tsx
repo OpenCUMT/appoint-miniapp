@@ -1,7 +1,7 @@
 import { Image, Swiper, SwiperItem, Text, View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import PlaceholderIcon from "@/assets/icon/placeholder.png";
-
+import {departments} from '@/store/user';
 import { createSignal } from 'solid-js';
 
 export default function Index() {
@@ -41,28 +41,22 @@ export default function Index() {
         </View>
       </View>
 
-      {/* 常用功能 */}
+       {/* 常用功能 */}
       <View class="w-[90%] min-h-[260rpx] rounded-[18rpx] bg-gradient-to-r from-[#f6d365] to-[#fda085] shadow-[0_8rpx_24rpx_rgba(253,160,133,0.08)] flex flex-col py-[24rpx] mb-[32rpx]">
         <Text class="text-[36rpx] text-white font-semibold m-0 mb-[20rpx] ml-[24rpx] tracking-[2rpx]">常用功能</Text>
         <View class="flex flex-row items-center justify-around w-full px-[12rpx]">
-          <View
-            class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
-            onClick={() => {
-              console.log("部门1预约 clicked");
-            }}
-          >
-            <Image class="w-[72rpx] h-[72rpx] mb-[8rpx]" src={PlaceholderIcon} />
-            <Text class="text-[26rpx] text-[#333] text-center font-medium tracking-[1px]">部门1预约</Text>
-          </View>
-          <View
-            class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
-            onClick={() => {
-              console.log("部门2预约 clicked");
-            }}
-          >
-            <Image class="w-[72rpx] h-[72rpx] mb-[8rpx]" src={PlaceholderIcon} />
-            <Text class="text-[26rpx] text-[#333] text-center font-medium tracking-[1px]">部门2预约</Text>
-          </View>
+          {departments().map(dept => (
+            <View
+              class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
+              onClick={() => {
+                console.log(`${dept}预约 clicked`);
+              }}
+            >
+              <Image class="w-[72rpx] h-[72rpx] mb-[8rpx]" src={PlaceholderIcon} />
+              <Text class="text-[26rpx] text-[#333] text-center font-medium tracking-[1px]">{dept}预约</Text>
+            </View>
+          ))}
+          {/* 可以根据需要保留或移除“我的”按钮 */}
           <View
             class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
             onClick={() => {
