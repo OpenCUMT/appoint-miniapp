@@ -59,7 +59,11 @@ export default function Settings() {
         <View class="flex flex-col flex-1 ml-[32rpx]">
           {/*开发者与管理员*/}
           <View class="flex flex-row">
-            <Text class="text-[36rpx] font-semibold mb-[8rpx]">{userInfo().name}</Text>
+            <Text class="text-[36rpx] font-semibold mb-[8rpx]"
+            onClick={() => {
+              console.log("跳转到登录页面");
+              Taro.navigateTo({ url: "/pages/login/index"} )
+              }}>{userInfo().name}</Text>
             {userInfo().isAdmin && (
               <View class="mt-[8rpx] px-[20rpx] py-[8rpx] rounded-[24rpx] text-[24rpx] font-medium">
                 管理员

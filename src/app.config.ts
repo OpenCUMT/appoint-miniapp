@@ -8,7 +8,8 @@ export default defineAppConfig({
     "pages/bindInstitutionId/index",
     "pages/privacy/index",
     "pages/shareList/index",
-    "pages/contact/index"
+    "pages/contact/index",
+    "pages/login/index"
   ],
   tabBar: {
     color: "#7A7E83",
