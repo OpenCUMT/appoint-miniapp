@@ -1,7 +1,7 @@
 import { View, Text, Input, Button } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import { createEffect, createSignal, For } from 'solid-js';
-import {userInfo} from '@/store/user';
+import {userInfo} from '@/utils/user';
 
 // 定义表单字段的类型接口
 interface FormField {

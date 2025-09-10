@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 
 // 用户信息类型定义
 export interface UserInfo {
+  token: string;
   name: string;
   avatar: string;
   studentId: string;
@@ -13,6 +14,7 @@ export interface UserInfo {
 
 // 默认用户信息
 const getDefaultUserInfo = (): UserInfo => ({
+  token: "",
   name: "开发者",
   avatar: "",
   studentId: "082333333",
