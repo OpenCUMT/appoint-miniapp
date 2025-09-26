@@ -16,6 +16,7 @@ export default function loginWechat() {
         });
         if(authRes.data.token){
           console.log('获取到的 token:', authRes.data.token);
+          Taro.setStorageSync('token', authRes.data.token);
           Taro.hideLoading();
           setUserInfo({
             ...userInfo(),
@@ -23,7 +24,7 @@ export default function loginWechat() {
           });
           console.log('当前用户信息:', userInfo());
           Taro.showToast({ title: '登录成功' });
-          Taro.switchTab({ url: '/pages/settings/index' });
+          Taro.switchTab({ url: '/pages/index/index' });
         }else{
           Taro.hideLoading();
           Taro.showToast({ title: '登录失败，未获取到 token'});

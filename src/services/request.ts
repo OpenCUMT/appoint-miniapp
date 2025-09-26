@@ -19,7 +19,7 @@ const interceptor = (chain) => {
   };
 
   return chain.proceed(requestParams).then(res => {
-    console.log(`http <-- ${url} result:`, res);
+    console.log(`http <-- ${url} result:`, res.data);
 
     // 处理 HTTP 错误
     if (res.statusCode < 200 || res.statusCode >= 300) {

@@ -1,5 +1,4 @@
 import request from "./request";
-import Taro from "@tarojs/taro";
 
 //获取并刷新用户信息
 export const fetchUserData = async ()=>{
@@ -14,10 +13,3 @@ export const fetchUserData = async ()=>{
   }
 }
 
-
-
-
-
-
-
-//修改用户信息

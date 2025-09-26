@@ -1,13 +1,16 @@
 import { Image, Swiper, SwiperItem, Text, View } from "@tarojs/components";
 import { useLoad } from "@tarojs/taro";
 import PlaceholderIcon from "@/assets/icon/placeholder.png";
-import {departments} from '@/store/user';
-import { createSignal } from 'solid-js';
+import {userInfo,departments,fetchDepartments,fetchUserData} from '@/store/user';
+import { For } from "solid-js";
 
 export default function Index() {
   useLoad(() => {
     console.log("Page loaded.");
   });
+  fetchDepartments();
+  fetchUserData();
+  console.log('用户信息:', userInfo());
   const imageList = [PlaceholderIcon];
   const statsData = [
     { value: 12, label: "本月部门1预约" },
@@ -34,7 +37,7 @@ export default function Index() {
       {/* 欢迎语 */}
       <View class="w-[90%] mb-[32rpx] px-[20rpx] py-[24rpx] bg-white/80 rounded-[16rpx] shadow-[0_4rpx_16rpx_rgba(0,0,0,0.04)] text-left">
         <View>
-          <Text class="text-[44rpx] font-bold text-[#2b5876] mb-[8rpx]">下午好, 开发者</Text>
+          <Text class="text-[44rpx] font-bold text-[#2b5876] mb-[8rpx]">下午好,{userInfo().username}</Text>
         </View>
         <View>
           <Text class="text-[28rpx] text-[#555]">美好的一天从这里开始</Text>
@@ -45,17 +48,19 @@ export default function Index() {
       <View class="w-[90%] min-h-[260rpx] rounded-[18rpx] bg-gradient-to-r from-[#f6d365] to-[#fda085] shadow-[0_8rpx_24rpx_rgba(253,160,133,0.08)] flex flex-col py-[24rpx] mb-[32rpx]">
         <Text class="text-[36rpx] text-white font-semibold m-0 mb-[20rpx] ml-[24rpx] tracking-[2rpx]">常用功能</Text>
         <View class="flex flex-row items-center justify-around w-full px-[12rpx]">
-          {departments().map(dept => (
-            <View
-              class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
-              onClick={() => {
-                console.log(`${dept}预约 clicked`);
-              }}
-            >
-              <Image class="w-[72rpx] h-[72rpx] mb-[8rpx]" src={PlaceholderIcon} />
-              <Text class="text-[26rpx] text-[#333] text-center font-medium tracking-[1px]">{dept}预约</Text>
-            </View>
-          ))}
+           <For each={departments()}>
+            {(dept) => (
+              <View
+                class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
+                onClick={() => {
+                  console.log(`${dept}预约 clicked`);
+                }}
+              >
+                <Image class="w-[72rpx] h-[72rpx] mb-[8rpx]" src={PlaceholderIcon} />
+                <Text class="text-[26rpx] text-[#333] text-center font-medium tracking-[1px]">{dept.name}预约</Text>
+              </View>
+            )}
+          </For>
           {/* 可以根据需要保留或移除“我的”按钮 */}
           <View
             class="w-[140rpx] h-[140rpx] flex flex-col items-center justify-around bg-white/70 rounded-[16rpx] shadow-[0_2rpx_8rpx_rgba(0,0,0,0.04)] transition-all duration-200 cursor-pointer active:bg-[#f0f0f0] active:shadow-[0_4rpx_16rpx_rgba(0,0,0,0.08)] active:scale-95"
