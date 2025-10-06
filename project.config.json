@@ -2,9 +2,9 @@
   "miniprogramRoot": "dist/",
   "projectname": "appoint-miniapp",
   "description": "CUMT Appoint Mini Program",
-  "appid": "wxaccc8a2ca071608a",
+  "appid": "wx02b857ca480e1183",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "compileHotReLoad": false,
