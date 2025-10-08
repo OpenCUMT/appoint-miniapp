@@ -1,10 +1,10 @@
 import { View, Text, Input, Button, Textarea } from "@tarojs/components";
 import { useLoad, useDidShow } from "@tarojs/taro";
 import Taro from "@tarojs/taro";
-import { createEffect, createSignal, For } from "solid-js";
-import { userInfo, } from "@/utils/user";
+import { createEffect, createSignal, For, Show } from "solid-js";
+import { userInfo, departments } from "@/utils/user";
 import request from "@/services/request";
-import CalendarModal from "./CalendarModal";
+import { CalendarComponent } from "@/components/CalendarComponent";
 
 // 定义表单字段的类型接口
 interface FormField {
@@ -26,27 +26,18 @@ export default function Index() {
   const [formTitle, setFormTitle] = createSignal("加载中...");
   // 使用 signal 存储用户输入的数据
   const [formData, setFormData] = createSignal<Record<string, string | string[]>>({});
+  // 日历组件显示状态
+  const [showCalendar, setShowCalendar] = createSignal(false);
+  // 当前选择的日期字段ID
+  const [currentDateField, setCurrentDateField] = createSignal<string>("");
 
-  const [calendarVisible, setCalendarVisible] = createSignal(false);
-  const [calendarTargetField, setCalendarTargetField] = createSignal<string | null>(null);
-  const [calendarYear, setCalendarYear] = createSignal(new Date().getFullYear());
-  const [calendarMonth, setCalendarMonth] = createSignal(new Date().getMonth() + 1);
-  const [disabledDates, setDisabledDates] = createSignal<Set<string>>(new Set());
-
-  const openCalendar = (fieldId: string) => {
-    console.log("打开日历，目标字段:", fieldId);
-    setCalendarTargetField(fieldId);
-    const cur = formData()[fieldId] as string;
-    const d = cur ? new Date(cur) : new Date();
-    setCalendarYear(d.getFullYear());
-    setCalendarMonth(d.getMonth() + 1);
-    setCalendarVisible(true);
-  };
 
   createEffect(() => {
-    const department = userInfo().department;
-    if (department) {
-      setFormTitle(department);
+    const user = userInfo();
+    const departmentList = departments();
+    const userDepartment = departmentList.find(dept => dept.id === user.departmentId);
+    if (userDepartment) {
+      setFormTitle(userDepartment.name);
     } else {
       setFormTitle("加载中...");
     }
@@ -134,13 +125,29 @@ export default function Index() {
   useLoad(() => {
     fetchForm();
   });
-  useDidShow(() => {
-    fetchForm();
-  });
 
   // 处理输入变化
   const handleInputChange = (fieldId: string, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [fieldId]: value }));
+  };
+
+  // 处理日期选择
+  const handleDateClick = (fieldId: string) => {
+    setCurrentDateField(fieldId);
+    setShowCalendar(true);
+  };
+
+  // 处理日历日期选择
+  const handleCalendarDateSelect = (date: string) => {
+    handleInputChange(currentDateField(), date);
+    setShowCalendar(false);
+    setCurrentDateField("");
+  };
+
+  // 关闭日历
+  const closeCalendar = () => {
+    setShowCalendar(false);
+    setCurrentDateField("");
   };
 
   // 提交表单
@@ -203,17 +210,13 @@ export default function Index() {
                 >
                   {(formData()[field.id] as string) || "请选择"}
                 </Button>
-              ) : field.type === "date" ?(
-                <View
-                  onClick={()=>{
-                    console.log("点击日期");
-                      openCalendar(field.id);
-                  }}
-                  class="w-full h-11 border rounded-lg px-2.5 text-base box-border flex items-center">
-                  <Text class="text-gray-500">
-                    {(formData()[field.id] as string) || "请点此选择日期"}
-                  </Text>
-                </View>
+              ) : field.type === "date" ? (
+                <Button
+                  class="w-full h-11 text-left rounded-lg border"
+                  onClick={() => handleDateClick(field.id)}
+                >
+                  {(formData()[field.id] as string) || "请选择日期"}
+                </Button>
               )
               : field.type === "images" ? (
                 <Button
@@ -245,28 +248,24 @@ export default function Index() {
           )}
         </For>
       </View>
-      {/* 日历弹窗 */}
-      <CalendarModal
-        visible={calendarVisible()}
-        year={calendarYear()}
-        month={calendarMonth()}
-        value={calendarTargetField() ? (formData()[calendarTargetField()!] as string) : ""}
-        onClose={() => setCalendarVisible(false)}
-        onConfirm={(dateStr) => {
-          if (calendarTargetField()) {
-            handleInputChange(calendarTargetField()!, dateStr);
-          }
-          setCalendarVisible(false);
-        }}
-        disabledDates={disabledDates()}
-      >
-      </CalendarModal>
       {/* 提交按钮 */}
       <View class="w-full mt-10">
         <Button class=" text-black rounded-lg" onClick={handleSubmit}>
           立即预约
         </Button>
       </View>
+
+      {/* 日历组件覆盖层 */}
+      <Show when={showCalendar()}>
+        <View class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
+          <View class="w-full h-full max-w-full">
+            <CalendarComponent
+              onDateSelect={handleCalendarDateSelect}
+              onClose={closeCalendar}
+            />
+          </View>
+        </View>
+      </Show>
     </View>
   );
 }

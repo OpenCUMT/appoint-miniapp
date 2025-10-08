@@ -7,7 +7,7 @@ export interface UserInfo {
   token: string;
   username: string;
   avatar: string;
-  studentId: string;
+  openId: string;
   departmentId: number;
   isAdmin: boolean;
   //不止，还要加
@@ -18,7 +18,7 @@ const getDefaultUserInfo = (): UserInfo => ({
   token: "",
   name: "开发者",
   avatar: "",
-  studentId: "082333333",
+  openId: "oJIEE7qokUg-k_OfH9ll6cj2NY8E",
   departmentId:1,
   isAdmin: true,
 });
@@ -60,7 +60,7 @@ export const fetchUserData = async ()=>{
       token: userInfo().token, // 保持现有 token 不变
       username: userDataFromServer.data.username,
       avatar: userDataFromServer.data.avatar,
-      studentId: userDataFromServer.data.studentId,
+      openId: userDataFromServer.data.openId,
       departmentId: userDataFromServer.data.department,
       isAdmin: userDataFromServer.data.isAdmin,
     });
